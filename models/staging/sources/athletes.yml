@@ -1,0 +1,26 @@
+      version: 2
+
+sources:
+  - name: athletes_db
+    database: training
+    schema: rotemlab
+    tables:
+      - name: athletes
+        columns:
+          - name: athlete_id
+            tests:
+              - unique
+              - not_null
+        loaded_at_field: upd_date
+        freshness:
+          warn_after: {count: 12, period: hour}
+          error_after: {count: 24, period: hour}
+      - name: athlete_events
+        columns:
+          - name: athlete_id
+            tests:
+              - not_null
+        loaded_at_field: upd_date
+        freshness:
+          warn_after: {count: 12, period: hour}
+          error_after: {count: 24, period: hour}
